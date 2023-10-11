@@ -1,6 +1,7 @@
 var User = require("../models/user");
 var express = require("express");
 var router = express.Router();
+const { isNull } = require("util");
 
 router.get("/node-mongodb-mongoose-user", function (req, res, next) {
   res.render("node");
@@ -19,25 +20,27 @@ router.post("/node-mongodb-mongoose-user", async function (req, res, next) {
   res.redirect("/node-mongodb-mongoose-user-busca");
 });
 
-router.get("/node-mongodb-mongoose-user", async function (req, res, next) {
-  // User.findOne({}, function (err, documents) {
-  //   if (err) {
-  //     return res.send("Error!! :-(");
-  //   }
-  //   res.render("node", { firstNameV: documents });
-  // });
-  const userFind = await User.findOne({});
-  if (isNull(userFind)) {
-    return res.send("Error!!!");
-  }
+router.get(
+  "/node-mongodb-mongoose-user-busca",
+  async function (req, res, next) {
+    const userFind = await User.findOne({});
 
-  res.render("node", {
-    firstNameV: userFind.firstName,
-    lastNameV: userFind.lastName,
-    passwordV: userFind.password,
-    emailV: userFind.email,
-    messagesV: userFind.message,
-  });
+    if (isNull(userFind)) {
+      return res.send("Error!!!");
+    }
+
+    res.render("node", {
+      firstNameV: userFind.firstName,
+      lastNameV: userFind.lastName,
+      passwordV: userFind.password,
+      emailV: userFind.email,
+      messagesV: userFind.message,
+    });
+  }
+);
+
+router.get("/", (req, res, next) => {
+  res.render("index");
 });
 
 module.exports = router;

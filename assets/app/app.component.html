@@ -1,6 +1,8 @@
-<div style="text-align: center;">
-    <h1 style="color: rgb(163, 12, 208)">HIGH 5</h1>
-    <div class="center">
-        <img src="https://media.tenor.com/DiErI3A2ZB0AAAAM/cat-high-five.gif" alt="hi-5"/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <app-message [messageVarClasse]="msg" (editClicked_MessageMetodoClasse)="msg.content = $event" *ngFor="let msg of messageS" ></app-message>
+            <app-message [inputMessage]="messageBindingAlias" ></app-message>
+        </div>
     </div>
 </div>
