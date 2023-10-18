@@ -1,0 +1,11 @@
+<div class="col-md-8 col-md-offset-2" style="margin-bottom: 30px;">
+    <form (ngSubmit)="onSubmit(refLocalForm)" #refLocalForm="ngForm" ngNativeValidate class>
+        <div class="form-group">
+            <label for="myContent">Conteúdo</label>
+            <input type="text" id="myContent" class="form-control" #refLocalInputmyContent ngModel name="myContentngForm" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" oninput="setCustomValidity('')"/>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="onSave(refLocalInputmyContent.value)">
+            Save message
+        </button>
+    </form>
+  </div>
