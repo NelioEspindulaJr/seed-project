@@ -1,7 +1,6 @@
 var User = require("../models/user");
 var express = require("express");
 var router = express.Router();
-const { isNull } = require("util");
 
 router.get("/node-mongodb-mongoose-user", function (req, res, next) {
   res.render("node");
@@ -15,7 +14,22 @@ router.post("/node-mongodb-mongoose-user", async function (req, res, next) {
     password: "password",
     email: emailVar,
   });
-  await userObject.save();
+
+  try {
+    const userSave = await userObject.save();
+
+    console.log(userSave);
+    console.log("email salvo: ", userSave.email);
+
+    res
+      .status(201)
+      .json({ messageSuccess: "Usuário salvo com sucesso", user: userSave });
+  } catch (error) {
+    result.status(500).json({
+      errorTitle: "Um erro aconteceu ao salvar o usuário",
+      error: err,
+    });
+  }
 
   res.redirect("/node-mongodb-mongoose-user-busca");
 });
@@ -25,7 +39,7 @@ router.get(
   async function (req, res, next) {
     const userFind = await User.findOne({});
 
-    if (isNull(userFind)) {
+    if (!userFind) {
       return res.send("Error!!!");
     }
 
