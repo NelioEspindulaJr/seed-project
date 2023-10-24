@@ -1,23 +1,23 @@
 <h1>SIGN UP</h1>
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form #signupForm="ngForm" (ngSubmit)="onSignup(myForm.value)">
     <div class="form-group">
         <label for="firstName">Nome:</label>
-        <input type="text" id="firstName" class="form-control" formControlName="firstNameTS">
+        <input type="text" id="firstName" class="form-control" name="firstName" required [(ngModel)]="myForm.value.firstNameTS">
     </div>
 
     <div class="form-group">
         <label for="lastName">Sobrenome:</label>
-        <input type="text" id="lastName" class="form-control" formControlName="lastNameTS">
+        <input type="text" id="lastName" class="form-control" name="lastName" required [(ngModel)]="myForm.value.lastNameTS">
     </div>
 
     <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" class="form-control" formControlName="emailTS">
+        <input type="email" id="email" class="form-control" name="email" required [(ngModel)]="myForm.value.emailTS">
     </div>
 
     <div class="form-group">
-        <label for="pass">Password:</label>
-        <input type="password" id="pass" class="form-control" formControlName="passwordTS">
+        <label for="password">Password:</label>
+        <input type="password" id="password" class="form-control" name="password" required [(ngModel)]="myForm.value.passwordTS">
     </div>
 
     <button class="btn btn-primary" type="submit">Cadastrar</button>

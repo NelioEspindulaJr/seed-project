@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var mongooseUniqueValidator = require("mongoose-unique-validator");
@@ -7,8 +8,13 @@ var schema = new Schema({
   lastName: { type: String, required: true },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+  token: { type: String },
   messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 });
+
+schema.methods.comparePassword = function (loggingUserPassword) {
+  return bcrypt.compare(loggingUserPassword, this.password);
+};
 
 schema.plugin(mongooseUniqueValidator);
 

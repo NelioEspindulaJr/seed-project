@@ -1,7 +1,6 @@
-import { Component, Input, Output } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { Message } from "./message.model";
 import { MessageService } from "./message.services";
-import { EventEmitter } from "events";
 @Component({
   selector: "app-message",
   templateUrl: "./message.component.html",
@@ -23,25 +22,23 @@ import { EventEmitter } from "events";
   ],
 })
 export class MessageComponent {
-  constructor(private messageServiceObj: MessageService) {}
-
+  constructor(private messageService: MessageService) {}
   @Input() messageVarClasse: Message = new Message("", "");
-
   @Input("inputMessage") messageVarClasseAlias: Message = new Message("", "");
 
-  @Output("outputMessage") editClicked_MessageMetodoClasse = new EventEmitter();
+  @Output() editClicked_MessageMetodoClasse = new EventEmitter<string>();
+  @Output() deleteClicked_MessageMetodoClasse = new EventEmitter<void>();
 
-  @Output("outputMessage") editClicked_MessageMetodoClasseAlias =
-    new EventEmitter();
-  color = "yellow";
-  onEdit() {
-    this.editClicked_MessageMetodoClasse.emit("texto veio de la e ta pra ca");
-    this.editClicked_MessageMetodoClasseAlias.emit(
-      "texto veio de la e ta pra ca - alias"
-    );
+  color = "#CBC3E3";
+
+  onEdit(event: Event) {
+    event.preventDefault();
+    this.editClicked_MessageMetodoClasse.emit("**Mensagem Editada");
   }
 
-  onDelete() {
-    this.messageServiceObj.deleteMessage(this.messageVarClasse);
+  onDelete(event: Event) {
+    event.preventDefault();
+    this.messageService.deleteMessage(this.messageVarClasse);
+    this.deleteClicked_MessageMetodoClasse.emit();
   }
 }

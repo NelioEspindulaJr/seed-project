@@ -1,14 +1,14 @@
 <h1>SIGN IN</h1>
 <div>
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <form #signupForm="ngForm" (ngSubmit)="onLogin(myForm.value.emailTS, myForm.value.passwordTS)">
         <div class="form-group">
             <label for="email">Email: </label>
-            <input type="email" id="email" class="form-control" formControlName="emailTS">
+            <input type="email" id="email" class="form-control" name="email" required [(ngModel)]="myForm.value.emailTS">
         </div>
         <div class="form-group">
             <label for="password">Senha: </label>
-            <input type="password" id="password" class="form-control" formControlName="passwordTS">
+            <input type="password" id="password" class="form-control" name="password" required [(ngModel)]="myForm.value.passwordTS">
         </div>
-        <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Logar</button>
+        <button class="btn btn-primary" type="submit">Logar</button>
     </form>
 </div>

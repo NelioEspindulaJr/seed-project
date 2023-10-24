@@ -4,7 +4,7 @@
             <label for="myContent">Conteúdo</label>
             <input type="text" id="myContent" class="form-control" #refLocalInputmyContent ngModel name="myContentngForm" required oninvalid="this.setCustomValidity('Campo não pode ser vazio')" oninput="setCustomValidity('')"/>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="onSave(refLocalInputmyContent.value)">
+        <button type="submit" class="btn btn-primary">
             Save message
         </button>
     </form>

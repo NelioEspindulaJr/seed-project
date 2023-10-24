@@ -1,23 +1,25 @@
 var express = require("express");
 var router = express.Router();
-
 var Message = require("../models/message");
 
-router.post("/", function (req, res, next) {
-  var message = new Message({
-    content: req.body.content,
-  });
-  message.save(function (err, result) {
-    if (err) {
-      return result.status(500).json({
-        errorTitle: "Um erro aconteceu",
-        error: err,
-      });
-    }
+router.post("/", async function (req, res, next) {
+  try {
+    var message = new Message({
+      content: req.body.content,
+      userId: req.body.userId,
+    });
 
+    const savedMessage = await message.save();
     res.status(201).json({
       messageSuccess: "Mensagem salva com sucesso!",
-      message: result,
+      message: savedMessage,
     });
-  });
+  } catch (error) {
+    res.status(500).json({
+      errorTitle: "Um erro aconteceu",
+      error: error,
+    });
+  }
 });
+
+module.exports = router;

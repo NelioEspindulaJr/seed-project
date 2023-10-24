@@ -13,7 +13,11 @@ import { myRouting } from "./app.routing";
 import { LogoutComponent } from "./auth/logout.component";
 import { SigninComponent } from "./auth/signin.component";
 import { SignupComponent } from "./auth/signup.component";
-import { HttpModule } from "@angular/http";
+import { AuthenticationService } from "./auth/authentication.service";
+import { AuthGuard } from "./auth/auth.guard";
+import { HttpClientModule } from "@angular/common/http";
+import { LogoutGuard } from "./auth/logout.guard";
+import { UserComponent } from "./user/user.component";
 
 @NgModule({
   declarations: [
@@ -27,10 +31,16 @@ import { HttpModule } from "@angular/http";
     SigninComponent,
     SignupComponent,
     LogoutComponent,
-    HttpModule,
+    UserComponent,
   ],
-  imports: [BrowserModule, FormsModule, myRouting, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    myRouting,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   bootstrap: [AppComponent],
-  providers: [MessageService],
+  providers: [MessageService, AuthenticationService, AuthGuard, LogoutGuard],
 })
 export class AppModule {}

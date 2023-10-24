@@ -1,16 +1,14 @@
-<article class="panel panel-default" [ngStyle]="{backgroundColor: color}" (mouseenter)="color = 'green'" (mouseleave)="color = 'cyan'">
+<article class="panel panel-default" [ngStyle]="{backgroundColor: color}" (mouseenter)="color = '#E6E6FA'" (mouseleave)="color = '#CBC3E3'">
     <div class="panel-body">
         {{ messageVarClasse.content }}
-        {{ messageVarClasseAlias.content }}
     </div>
     <footer class="panel-footer">
         <div class="author">
         {{ messageVarClasse.username }}
-        {{ messageVarClasseAlias.username }}
         </div>
         <div class="config">
-            <a href="#" (click)="onEdit()">Edit</a>
-            <a href="#" (click)="onDelete()">Delete</a>
+            <a href="#" (click)="onEdit($event)">Edit</a>
+            <a href="#" (click)="onDelete($event)">Delete</a>
         </div>
     </footer>
 </article>

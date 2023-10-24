@@ -18,11 +18,7 @@ import { MessageService } from "./message.services";
 export class MessageList implements OnInit {
   constructor(private messageService: MessageService) {}
 
-  messageS: Message[] = [
-    new Message("Xurras da jogada", "Nélio"),
-    new Message("Tigarro", "Hugo"),
-    new Message("sem memoria", "Lia"),
-  ];
+  messageS: Message[] = [];
 
   ngOnInit(): void {
     this.messageS = this.messageService.getMessages();
