@@ -1,3 +1,30 @@
 <div class="col-md-5 col-md-offset-2">
     <h1>USER</h1>
+    <form (ngSubmit)="submitForm()">
+        <label for="selectBox">Seu doce preferido:</label>
+        <select id="selectBox" [(ngModel)]="selectedOption" name="selectedOption">
+          <option value="sorvete">Sorvete</option>
+          <option value="bolo">Bolo</option>
+          <option value="chocolate">Chocolate</option>
+        </select>
+        <br />
+      
+        <label for="radioGroup">Qual seu gênero:</label>
+        <input type="radio" id="feminino" [(ngModel)]="radioOption" name="radioGroup" value="feminino" />
+        <label for="feminino">Feminino</label>
+        <input type="radio" id="masculino" [(ngModel)]="radioOption" name="radioGroup" value="masculino" />
+        <label for="masculino">Masculino</label>
+        <input type="radio" id="nao_bin" [(ngModel)]="radioOption" name="radioGroup" value="nao_bin" />
+        <label for="nao_bin">Não Binario</label>
+        <input type="radio" id="sem_resposta" [(ngModel)]="radioOption" name="radioGroup" value="sem_resposta" />
+        <label for="sem_resposta">Prefiro não responder</label>
+        <br />
+      
+        <label for="checkboxOption">Estou de acordo em forncer essas informações:</label>
+        <input type="checkbox" id="checkboxOption" [(ngModel)]="checkboxOption" name="checkboxOption" />
+        <br />
+      
+        <button type="submit">Enviar</button>
+      </form>
+
 </div>
