@@ -4,6 +4,7 @@ var User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const config = require("../config/database");
+const jwtDecode = require("jwt-decode");
 
 router.post("/", async function (req, res, next) {
   try {
@@ -24,6 +25,39 @@ router.post("/", async function (req, res, next) {
     res.status(500).json({ error: error });
   }
 });
+
+router.get("/user/:id", async function (req, res, next) {
+  try {
+
+    User.findById(req.params.id)
+
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).json({error: error});
+  }
+    
+});
+
+router.post("/user/:id", async function (req, res, next) {
+  try {
+    var user = User.findById(req.params.id)
+
+    user.updateOne({
+      favoriteCandy: req.body.favCandy,
+      gender: req.body.gender,
+      agree: req.body.agree,
+    });
+
+    await user.save();
+    res
+      .status(200)
+      .json({ message: "Usuário editado com sucesso!", user: user });
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+});
+
+
 
 router.post("/signin", async function (req, res, next) {
   try {

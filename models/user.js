@@ -9,6 +9,9 @@ var schema = new Schema({
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   token: { type: String },
+  favoriteCandy : {type: String},
+  gender : {type: String},
+  agree: {type: Boolean},
   messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 });
 
